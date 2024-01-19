@@ -1,5 +1,6 @@
 import React from "react";
 import Sidebar from "../Sidebar/Sidebar";
+import csvFile from "../../Assets/download.xlsx"
 
 const Payments = () => {
   return (
@@ -10,6 +11,7 @@ const Payments = () => {
       <div className="p-4 sm:ml-64">
         <div class="relative overflow-x-auto">
           {/* dummy table 1 */}
+
           <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
               French Textbook
@@ -17,16 +19,20 @@ const Payments = () => {
                 List of payment made for the french textbook.
               </p>
             </caption>
+
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th scope="col" class="px-6 py-3">
                   #
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class=" py-3">
                   Transaction ID
                 </th>
                 <th scope="col" class="px-6 py-3">
                   User name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Status
                 </th>
                 <th scope="col" class="px-6 py-3">
                   Amount
@@ -44,8 +50,9 @@ const Payments = () => {
                 >
                   1
                 </th>
-                <td class="px-6 py-4">SQPIDO6384121457997700002</td>
+                <td class=" py-4">SQPIDO6384121457997700002</td>
                 <td class="px-6 py-4">Akande Mercy</td>
+                <td class="px-6 py-4">okay</td>
                 <td class="px-6 py-4">₦ 4000</td>
                 <td class="px-6 py-4">18 January, 2024 11:43 pm</td>
               </tr>
@@ -56,8 +63,9 @@ const Payments = () => {
                 >
                   2
                 </th>
-                <td class="px-6 py-4">6ceb7891-c061-4c6a-87c4-06ed0601e623</td>
+                <td class=" py-4">6ceb7891-c061-4c6a-87c4-06ed0601e623</td>
                 <td class="px-6 py-4">Akande Mercy</td>
+                <td class="px-6 py-4">okay</td>
                 <td class="px-6 py-4">₦ 4000</td>
                 <td class="px-6 py-4">17 January, 2024 11:43 pm</td>
               </tr>
@@ -68,13 +76,22 @@ const Payments = () => {
                 >
                   3
                 </th>
-                <td class="px-6 py-4">6ceb7891-c061-4c6a-87c4-06ed0601e6fb</td>
+                <td class=" py-4">6ceb7891-c061-4c6a-87c4-06ed0601e6fb</td>
                 <td class="px-6 py-4">Akande Mercy</td>
+                <td class="px-6 py-4">okay</td>
                 <td class="px-6 py-4">₦ 4000</td>
                 <td class="px-6 py-4">19 January, 2024 11:43 pm</td>
               </tr>
             </tbody>
           </table>
+          <button
+                  type="submit"
+                  class="py-3 px-5 m-4  justify-self-end text-sm font-medium text-center text-white rounded-lg bg-blue-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                >
+                    <a href={csvFile} download="download.xslx">
+                  Export as CSV
+                  </a>
+                </button>
 
           {/* dummy table 2 */}
           <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -89,11 +106,14 @@ const Payments = () => {
                 <th scope="col" class="px-6 py-3">
                   #
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class=" py-3">
                   Transaction ID
                 </th>
                 <th scope="col" class="px-6 py-3">
                   User name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Status
                 </th>
                 <th scope="col" class="px-6 py-3">
                   Amount
@@ -111,8 +131,9 @@ const Payments = () => {
                 >
                   1
                 </th>
-                <td class="px-6 py-4">SQPIDO6384121457997700002</td>
+                <td class=" py-4">SQPIDO6384121457997700002</td>
                 <td class="px-6 py-4">Akande Mercy</td>
+                <td class="px-6 py-4">okay</td>
                 <td class="px-6 py-4">₦ 4000</td>
                 <td class="px-6 py-4">18 January, 2024 11:43 pm</td>
               </tr>
@@ -123,8 +144,9 @@ const Payments = () => {
                 >
                   2
                 </th>
-                <td class="px-6 py-4">6ceb7891-c061-4c6a-87c4-06ed0601e623</td>
+                <td class=" py-4">6ceb7891-c061-4c6a-87c4-06ed0601e623</td>
                 <td class="px-6 py-4">Akande Mercy</td>
+                <td class="px-6 py-4">okay</td>
                 <td class="px-6 py-4">₦ 4000</td>
                 <td class="px-6 py-4">17 January, 2024 11:43 pm</td>
               </tr>
@@ -135,13 +157,21 @@ const Payments = () => {
                 >
                   3
                 </th>
-                <td class="px-6 py-4">6ceb7891-c061-4c6a-87c4-06ed0601e6fb</td>
+                <td class=" py-4">6ceb7891-c061-4c6a-87c4-06ed0601e6fb</td>
                 <td class="px-6 py-4">Akande Mercy</td>
+                <td class="px-6 py-4">okay</td>
                 <td class="px-6 py-4">₦ 4000</td>
                 <td class="px-6 py-4">19 January, 2024 11:43 pm</td>
               </tr>
             </tbody>
           </table>
+          <button
+                  type="submit"
+                  class="py-3 px-5 m-4  justify-self-end text-sm font-medium text-center text-white rounded-lg bg-blue-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                >
+                  Export as CSV
+                </button>
+
           {/* dummy table 3 */}
           <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
@@ -155,11 +185,14 @@ const Payments = () => {
                 <th scope="col" class="px-6 py-3">
                   #
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class=" py-3">
                   Transaction ID
                 </th>
                 <th scope="col" class="px-6 py-3">
                   User name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Status
                 </th>
                 <th scope="col" class="px-6 py-3">
                   Amount
@@ -177,8 +210,9 @@ const Payments = () => {
                 >
                   1
                 </th>
-                <td class="px-6 py-4">SQPIDO6384121457997700002</td>
+                <td class=" py-4">SQPIDO6384121457997700002</td>
                 <td class="px-6 py-4">Akande Mercy</td>
+                <td class="px-6 py-4">okay</td>
                 <td class="px-6 py-4">₦ 4000</td>
                 <td class="px-6 py-4">18 January, 2024 11:43 pm</td>
               </tr>
@@ -189,8 +223,9 @@ const Payments = () => {
                 >
                   2
                 </th>
-                <td class="px-6 py-4">6ceb7891-c061-4c6a-87c4-06ed0601e623</td>
+                <td class=" py-4">6ceb7891-c061-4c6a-87c4-06ed0601e623</td>
                 <td class="px-6 py-4">Akande Mercy</td>
+                <td class="px-6 py-4">okay</td>
                 <td class="px-6 py-4">₦ 4000</td>
                 <td class="px-6 py-4">17 January, 2024 11:43 pm</td>
               </tr>
@@ -201,13 +236,20 @@ const Payments = () => {
                 >
                   3
                 </th>
-                <td class="px-6 py-4">6ceb7891-c061-4c6a-87c4-06ed0601e6fb</td>
+                <td class=" py-4">6ceb7891-c061-4c6a-87c4-06ed0601e6fb</td>
                 <td class="px-6 py-4">Akande Mercy</td>
+                <td class="px-6 py-4">okay</td>
                 <td class="px-6 py-4">₦ 4000</td>
                 <td class="px-6 py-4">19 January, 2024 11:43 pm</td>
               </tr>
             </tbody>
           </table>
+          <button
+                  type="submit"
+                  class="py-3 px-5 m-4  justify-self-end text-sm font-medium text-center text-white rounded-lg bg-blue-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                >
+                  Export as CSV
+                </button>
         </div>
       </div>
     </div>
