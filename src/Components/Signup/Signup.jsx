@@ -26,49 +26,38 @@ const Signup = () => {
     console.log(formData);
     e.preventDefault()
 
-    navigate('/home')
+    // navigate('/home')
 
     // Send a POST request
-    // await axios({
-    //   method: "post",
-    //   url: `${BASE_URL}/virtual-account`,
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    //   // data: {
-    //   //   customer_identifier: "CCC",
-    //   //   first_name: formData.first_name,
-    //   //   last_name: formData.last_name,
-    //   //   mobile_num: formData.mobile_num,
-    //   //   email: formData.email,
-    //   //   bvn: formData.bvn,
-    //   //   dob: formData.dob,
-    //   //   address: formData.address,
-    //   //   gender: formData.gender,
-    //   //   beneficiary_account: "4920299492",
-    //   // },
-    //   data: {
-    //     customer_identifier: "CCC",
-    //     first_name: "Joesph",
-    //     last_name: "Ayodele",
-    //     mobile_num: "08139011943",
-    //     email: "ayo@gmail.com",
-    //     bvn: "12343211654",
-    //     dob: "30/10/1990",
-    //     address: "22 Kota street, UK",
-    //     gender: "1",
-    //     beneficiary_account: "4920299492",
-    //   },
-    // }).then(function (response) {
-    //   console.log(response.data);
-    //   console.log(response.data.data);
-    //   if (response.data.status === 200) {
-    //     window.open(`${SQUADCO}/${formData.hash}`, "_blank", "noreferrer");
-    //   }
-    //   //   setUrl(response.data.data.checkout_url)
-    //   navigate("/home");
-    //   //   window.open(`${SQUADCO}/${formData.hash}`, '_blank', 'noreferrer');
-    // });
+    await axios({
+      method: "post",
+      url: `${BASE_URL}/virtual-account`,
+      headers: {
+        // "Content-Type": "Applica"
+        Authorization: `Bearer ${token}`,
+      },
+      data: {
+        customer_identifier: "CCC",
+        first_name: "Joesp",
+        last_name: "Ayodel",
+        mobile_num: "08139011943",
+        email: "ayo@gmail.com",
+        bvn: "22234321165",
+        dob: "10/30/1990",
+        address: "22 Kota street, UK",
+        gender: "1",
+        beneficiary_account: "4920299492",
+      },
+    }).then(function (response) {
+      console.log(response.data);
+      console.log(response.data.data);
+      if (response.data.status === 200) {
+        window.open(`${SQUADCO}/${formData.hash}`, "_blank", "noreferrer");
+      }
+      //   setUrl(response.data.data.checkout_url)
+      navigate("/home");
+      //   window.open(`${SQUADCO}/${formData.hash}`, '_blank', 'noreferrer');
+    });
   };
   return (
     <div>

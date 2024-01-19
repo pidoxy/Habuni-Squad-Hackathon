@@ -1,9 +1,38 @@
 import React from "react";
 
 const Login = () => {
+
+  const BASE_URL = "https://squad-e2vj.onrender.com/swagger/";
+  // const [formData, setFormData] = useState({email: "", password: ""})
+
+  const generatePaymentLink = async () => {
+
+    // Send a POST request
+    // await axios({
+    //   method: "post",
+    //   url: `${BASE_URL}payment_link/otp`,
+    //   headers: {
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    //   data: {
+    //     first_name: "Test",
+    //     last_name: "Test",
+    //     email: "example1@mail.com",
+    //     password1: "test.com",
+    //     password2: "test.com"
+    //   },
+    // }).then(function (response) {
+    //   console.log(response.data);
+    //   console.log(response.data.data);
+    //   if (response.data.status === 200) {
+    //     window.open(`${SQUADCO}/${formData.hash}`, "_blank", "noreferrer");
+    //   }
+    // });
+  };
+
   return (
     <div>
-      <div className="w-full max-w-xs my-auto">
+      <div className="w-full mx-auto my-28 max-w-xs">
 
         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">
