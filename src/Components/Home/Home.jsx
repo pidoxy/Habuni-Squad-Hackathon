@@ -16,9 +16,8 @@ const Home = () => {
     expire_by: "2024-04-26T11:22:08.587Z",
     amount: 4000,
     currency_id: "NGN",
-    currency_id: "NGN",
-    description: "kjv",
-    redirect_link: "http://localhost:3000/home#",
+    description: "",
+    redirect_link: "https://habuni-squad-hackathon.vercel.app/home",
     //   return_msg: "Successful"
   });
 
@@ -226,6 +225,9 @@ const Home = () => {
                   placeholder="••••••••"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   required
+                  onChange={(e) =>
+                    setFormData({ ...formData, description: e.target.value })
+                  }
                 />
               </div>
               {/* <div>
@@ -260,27 +262,15 @@ const Home = () => {
                   placeholder="••••••••"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   required
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
                 />
               </div>
 
             </form>
             {/* <!-- Modal footer --> */}
             <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-              <button
-                data-modal-hide="default-modal"
-                type="button"
-                class="ms-3 text-gray-500 justify-stretch bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-              >
-                Cancel
-              </button>
-
-              <button
-                data-modal-hide="default-modal"
-                type="button"
-                class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-              >
-                Go Back
-              </button>
 
               <button
                 data-modal-hide="default-modal"
