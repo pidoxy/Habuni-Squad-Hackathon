@@ -4,10 +4,12 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import { redirect, useNavigate } from "react-router-dom";
 import Sidebar from "../Sidebar/Sidebar";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const Home = () => {
   // id = uuidv4();
   const [open, setOpen] = useState(false);
+  const [link, setLink] = useState({link: "", copied: false });
   const [formData, setFormData] = useState({
     name: "jjj",
     //   alphanumeric
@@ -18,7 +20,7 @@ const Home = () => {
     currency_id: "NGN",
     description: "",
     redirect_link: "https://habuni-squad-hackathon.vercel.app/home",
-    //   return_msg: "Successful"
+    return_msg: "",
   });
 
   const BASE_URL = "https://sandbox-api-d.squadco.com/";
@@ -57,7 +59,9 @@ const Home = () => {
       console.log(response.data);
       console.log(response.data.data);
       if (response.data.status === 200) {
-        window.open(`${SQUADCO}/${formData.hash}`, "_blank", "noreferrer");
+        // window.open(`${SQUADCO}/${formData.hash}`, "_blank", "noreferrer");
+        alert("Link Created, copy the link below");
+        setLink({...link, link:`${SQUADCO}/${formData.hash}`});
       }
       //   setUrl(response.data.data.checkout_url)
       // navigate(response.data.data.checkout_url);
@@ -102,7 +106,7 @@ const Home = () => {
             onClick={() => setOpen(true)}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mb-4 rounded"
           >
-            Create payment Link
+            Create Collection Link
           </button>
           <Modal open={open} onClose={() => setOpen(false)}>
             {/* <!-- Modal header --> */}
@@ -118,7 +122,7 @@ const Home = () => {
                   for="payment"
                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Payment Title<span className="text-red-500">*</span>
+                  Collection Title<span className="text-red-500">*</span>
                 </label>
                 <input
                   type="payment"
@@ -146,7 +150,7 @@ const Home = () => {
                     value=""
                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     required
-                    />
+                  />
                   <label
                     for="checked-checkbox"
                     class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
@@ -169,7 +173,7 @@ const Home = () => {
                     value=""
                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     required
-                    />
+                  />
                   <label
                     for="checked-checkbox"
                     class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
@@ -208,7 +212,7 @@ const Home = () => {
                   type="description"
                   name="description"
                   id="description"
-                  placeholder="••••••••"
+                  placeholder="Type in your description here"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   required
                   onChange={(e) =>
@@ -216,23 +220,7 @@ const Home = () => {
                   }
                 />
               </div>
-              {/* <div>
-                <label
-                  for="extra_info"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Do you want to collect any extra information?
-                  <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="extra_info"
-                  name="extra_info"
-                  id="extra_info"
-                  placeholder="••••••••"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                  required
-                />
-              </div> */}
+
               <div>
                 <label
                   for="return_message"
@@ -245,28 +233,41 @@ const Home = () => {
                   type="return_message"
                   name="return_message"
                   id="return_message"
-                  placeholder="••••••••"
+                  placeholder="Type a return message here"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                   required
                   onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
+                    setFormData({ ...formData, return_msg: e.target.value })
                   }
                 />
               </div>
-
             </form>
             {/* <!-- Modal footer --> */}
             <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-
               <button
                 data-modal-hide="default-modal"
                 type="button"
                 onClick={generatePaymentLink}
-                class="ms-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                class=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 Create Link
               </button>
+              <CopyToClipboard
+              text={link.link}
+              onCopy={() => setLink({...link, copied: true })}
+            >
+              <span
+                class="ms-8 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Copy link
+              </span>
+            </CopyToClipboard>
             </div>
+            <div className="block my-2">
+              {link.link && <a href={link.link}>{link.link}</a>}
+            </div>
+            
+            {link.copied ? <span style={{color: 'red'}}>Collection link Successfully copied, you can now share.</span> : null}
           </Modal>
           <div className="flex justify-between">
             <div>

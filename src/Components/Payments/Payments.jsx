@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../Sidebar/Sidebar";
 import csvFile from "../../Assets/download.xlsx"
+import axios from "axios";
 
 const Payments = () => {
+  const [data, setData] = useState([]);
+
+  const BASE_URL = "https://squad-e2vj.onrender.com";
+
+  const getTransactions = async() => {
+    // Send a POST request
+    await axios({
+      method: "get",
+      url: `${BASE_URL}/payment/view_all_payment/`,
+    }).then(function (response) {
+      console.log(response.data);
+      setData(response.data);
+      console.log(data);
+    });
+  }
+
+  useEffect(() => {
+    getTransactions();
+  }, []); 
+
+
   return (
     <div>
       {/* sidebar */}

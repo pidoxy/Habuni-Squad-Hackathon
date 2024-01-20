@@ -25,39 +25,40 @@ const Signup = () => {
   const createVirtualAccount = async (e) => {
     console.log(formData);
     e.preventDefault()
+    // creating virtual accounts needs more
 
     // navigate('/home')
-
     // Send a POST request
-    await axios({
-      method: "post",
-      url: `${BASE_URL}/virtual-account`,
-      headers: {
-        // "Content-Type": "Applica"
-        Authorization: `Bearer ${token}`,
-      },
-      data: {
-        customer_identifier: "CCC",
-        first_name: "Joesp",
-        last_name: "Ayodel",
-        mobile_num: "08139011943",
-        email: "ayo@gmail.com",
-        bvn: "22234321165",
-        dob: "10/30/1990",
-        address: "22 Kota street, UK",
-        gender: "1",
-        beneficiary_account: "4920299492",
-      },
-    }).then(function (response) {
-      console.log(response.data);
-      console.log(response.data.data);
-      if (response.data.status === 200) {
-        window.open(`${SQUADCO}/${formData.hash}`, "_blank", "noreferrer");
-      }
-      //   setUrl(response.data.data.checkout_url)
-      navigate("/home");
-      //   window.open(`${SQUADCO}/${formData.hash}`, '_blank', 'noreferrer');
-    });
+    // await axios({
+    //   method: "post",
+    //   url: `${BASE_URL}/virtual-account`,
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Accept': 'application/json',
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    //   data: {
+    //     customer_identifier: "CCC",
+    //     first_name: "Joesp",
+    //     last_name: "Ayodel",
+    //     mobile_num: "08139011943",
+    //     email: "ayo@gmail.com",
+    //     bvn: "22234321165",
+    //     dob: "10/30/1990",
+    //     address: "22 Kota street, UK",
+    //     gender: "1",
+    //     beneficiary_account: "4920299492",
+    //   },
+    // }).then(function (response) {
+    //   console.log(response.data);
+    //   console.log(response.data.data);
+    //   if (response.data.status === 200) {
+    //     window.open(`${SQUADCO}/${formData.hash}`, "_blank", "noreferrer");
+    //   }
+    //   //   setUrl(response.data.data.checkout_url)
+    //   navigate("/home");
+    //   //   window.open(`${SQUADCO}/${formData.hash}`, '_blank', 'noreferrer');
+    // });
   };
   return (
     <div>

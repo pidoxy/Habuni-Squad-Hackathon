@@ -1,33 +1,37 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
-  const BASE_URL = "https://squad-e2vj.onrender.com/swagger/";
-  // const [formData, setFormData] = useState({email: "", password: ""})
+  const navigate = useNavigate();
+
+  const BASE_URL = "https://squad-e2vj.onrender.com/";
+  const [formData, setFormData] = useState({ email: "", password: ""})
 
   const generatePaymentLink = async () => {
 
     // Send a POST request
-    // await axios({
-    //   method: "post",
-    //   url: `${BASE_URL}payment_link/otp`,
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    //   data: {
-    //     first_name: "Test",
-    //     last_name: "Test",
-    //     email: "example1@mail.com",
-    //     password1: "test.com",
-    //     password2: "test.com"
-    //   },
-    // }).then(function (response) {
-    //   console.log(response.data);
-    //   console.log(response.data.data);
-    //   if (response.data.status === 200) {
-    //     window.open(`${SQUADCO}/${formData.hash}`, "_blank", "noreferrer");
-    //   }
-    // });
+    try{
+    await axios({
+      method: "post",
+      url: `${BASE_URL}api/v1/auth/login/`,      
+      data: {
+          email: formData.email,
+          password: formData.password,
+        }
+    }).then(function (response) {
+      console.log(response);
+      if (response.status === 200){
+        alert('Login Successful');
+        navigate('/home')
+      }
+    });
+  }catch(error){
+    if (error.message === "Request failed with status code 400")
+    console.log(error)
+    alert("Invalid Login Details")
+  }
   };
 
   return (
@@ -40,13 +44,16 @@ const Login = () => {
               className="block text-gray-700 text-sm font-bold mb-2"
               for="username"
             >
-              Username
+              Email
             </label>
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="username"
+              id="email"
               type="text"
-              placeholder="Username"
+              placeholder="pidoxy@mail.com"
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
             />
           </div>
           <div className="mb-6">
@@ -57,19 +64,20 @@ const Login = () => {
               Password
             </label>
             <input
-              className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border border-grey-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               type="password"
               placeholder="******************"
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
             />
-            <p className="text-red-500 text-xs italic">
-              Please choose a password.
-            </p>
           </div>
           <div className="flex items-center justify-between">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button"
+              onClick={generatePaymentLink}
             >
               Sign In
             </button>
@@ -82,7 +90,7 @@ const Login = () => {
           </div>
         </form>
         <p className="text-center text-gray-500 text-xs">
-          &copy;2020 Acme Corp. All rights reserved.
+          &copy;2024 Habuni Corp. All rights reserved.
         </p>
       </div>
     </div>

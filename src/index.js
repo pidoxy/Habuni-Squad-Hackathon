@@ -45,11 +45,7 @@ const router = createBrowserRouter([
     element: <Payments />,
 
   },
-  {
-    path: "home/pos",
-    element: <SquadPos />,
-
-  },
+  
 ]);
 
 
