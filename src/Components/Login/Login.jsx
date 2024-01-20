@@ -81,12 +81,20 @@ const Login = () => {
             >
               Sign In
             </button>
+            <div className="inline-block space-y-4">
             <a
-              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+              className="block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
               href="#"
             >
               Forgot Password?
             </a>
+            <a
+              className="block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+              href="/signup"
+            >
+              Sign Up
+            </a>
+            </div>
           </div>
         </form>
         <p className="text-center text-gray-500 text-xs">

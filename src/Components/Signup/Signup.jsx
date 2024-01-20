@@ -5,8 +5,7 @@ import { redirect, useNavigate } from "react-router-dom";
 const Signup = () => {
   const navigate = useNavigate();
 
-  const BASE_URL = "https://sandbox-api-d.squadco.com/";
-  const token = "sandbox_sk_50844690725bb298637dc102b2ac6ab18a974ed24bcd";
+  const BASE_URL = "https://squad-e2vj.onrender.com";
   const SQUADCO = "https://sandbox-pay.squadco.com/";
 
   const [formData, setFormData] = useState({
@@ -32,17 +31,12 @@ const Signup = () => {
     // await axios({
     //   method: "post",
     //   url: `${BASE_URL}/virtual-account`,
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Accept': 'application/json',
-    //     Authorization: `Bearer ${token}`,
-    //   },
     //   data: {
     //     customer_identifier: "CCC",
     //     first_name: "Joesp",
     //     last_name: "Ayodel",
     //     mobile_num: "08139011943",
-    //     email: "ayo@gmail.com",
+    //     email: "ayo@gmai.com",
     //     bvn: "22234321165",
     //     dob: "10/30/1990",
     //     address: "22 Kota street, UK",
@@ -59,6 +53,29 @@ const Signup = () => {
     //   navigate("/home");
     //   //   window.open(`${SQUADCO}/${formData.hash}`, '_blank', 'noreferrer');
     // });
+
+    // local signup
+    // await axios({
+    //   method: "post",
+    //   url: `${BASE_URL}/api/v1/auth/registration/`,
+    //   data: {
+    //     first_name:"Test2",
+    //     last_name: "Test2",
+    //   email: "user@example.com",
+    //   password1: "example.com",
+    //   password2: "example.com"
+    // },
+    // }).then(function (response) {
+    //   console.log(response.data);
+    //   console.log(response.data.data);
+    //   if (response.data.status === 200) {
+    //     window.open(`${SQUADCO}/${formData.hash}`, "_blank", "noreferrer");
+    //   }
+    //   //   setUrl(response.data.data.checkout_url)
+    //   navigate("/home");
+    //   //   window.open(`${SQUADCO}/${formData.hash}`, '_blank', 'noreferrer');
+    // });
+    
   };
   return (
     <div>
