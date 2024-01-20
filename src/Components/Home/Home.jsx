@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Modal from "../Modal/Modal";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
@@ -8,7 +8,9 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const Home = () => {
   // id = uuidv4();
+  let ref = useRef([]);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [link, setLink] = useState({link: "", copied: false });
   const [formData, setFormData] = useState({
     name: "jjj",
@@ -23,11 +25,42 @@ const Home = () => {
     return_msg: "",
   });
 
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setLoading(true);
+  //   }, 2000);
+    
+  //   console.log(loading)
+  // }, [loading]);
+
+  let amount;
   const BASE_URL = "https://sandbox-api-d.squadco.com/";
   const token = "sandbox_sk_50844690725bb298637dc102b2ac6ab18a974ed24bcd";
   const SQUADCO = "https://sandbox-pay.squadco.com/";
 
   const navigate = useNavigate();
+
+  const getTransactions = async () => {
+    // Send a POST request
+    await axios({
+      method: "get",
+      url: `${BASE_URL}/payment/view_all_payment/`,
+    }).then(function (response) {
+      console.log(response.data);
+      ref.data = response.data;
+      console.log(ref.data)
+      
+    });
+    
+    ref.data.map((item) => {
+      
+      amount += item.amount;
+      return amount 
+      
+    })
+  };
+
+  // getTransactions();
 
   const generatePaymentLink = async () => {
     formData.hash = uuidv4();
@@ -112,7 +145,7 @@ const Home = () => {
             {/* <!-- Modal header --> */}
             <div className="flex items-center justify-between p-2 md:p-3 border-b rounded-t dark:border-gray-600">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                Simple payment link
+                Create New Collection 
               </h3>
             </div>
             {/* <!-- Modal body --> */}
@@ -267,7 +300,7 @@ const Home = () => {
               {link.link && <a href={link.link}>{link.link}</a>}
             </div>
             
-            {link.copied ? <span style={{color: 'red'}}>Collection link Successfully copied, you can now share.</span> : null}
+            {link.copied ? <span style={{color: 'green'}}>Collection link Successfully copied, you can now share.</span> : null}
           </Modal>
           <div className="flex justify-between">
             <div>
@@ -279,7 +312,7 @@ const Home = () => {
                   Available Balance
                 </p>
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  ₦ 0.00
+                  {(loading) ? `₦ ${amount}.00` : "₦ 1700.00"}
                 </h5>
                 <p class="font-normal text-gray-700 dark:text-gray-400">
                   You can withdraw this money or transfer it to any bank
@@ -293,17 +326,96 @@ const Home = () => {
                 class="block max-w-sm p-6 w-96 h-40 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
               >
                 <p class="font-normal text-gray-700 dark:text-gray-400">
-                  Outflow
+                  Total Inflow
                 </p>
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                   ₦ 7,949.70
                 </h5>
                 <p class="font-normal text-gray-700 dark:text-gray-400">
-                  Completed outgoing transactions.
+                  Total collections received.
                 </p>
               </p>
             </div>
           </div>
+            
+            {/* dummy table 2 */}
+          <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+              Class Dues
+              <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">
+                Record of class due payments made.
+              </p>
+            </caption>
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+              <tr>
+                <th scope="col" class="px-6 py-3">
+                  #
+                </th>
+                <th scope="col" class=" py-3">
+                  Transaction ID
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  User name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Status
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Amount
+                </th>
+                <th scope="col" class="px-6 py-3">
+                  Date
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th
+                  scope="row"
+                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                >
+                  1
+                </th>
+                <td class=" py-4">SQPIDO6384121457997700002</td>
+                <td class="px-6 py-4">Akande Mercy</td>
+                <td class="px-6 py-4">okay</td>
+                <td class="px-6 py-4">₦ 4000</td>
+                <td class="px-6 py-4">18 January, 2024 11:43 pm</td>
+              </tr>
+              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th
+                  scope="row"
+                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                >
+                  2
+                </th>
+                <td class=" py-4">6ceb7891-c061-4c6a-87c4-06ed0601e623</td>
+                <td class="px-6 py-4">Akande Mercy</td>
+                <td class="px-6 py-4">okay</td>
+                <td class="px-6 py-4">₦ 4000</td>
+                <td class="px-6 py-4">17 January, 2024 11:43 pm</td>
+              </tr>
+              <tr class="bg-white dark:bg-gray-800">
+                <th
+                  scope="row"
+                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                >
+                  3
+                </th>
+                <td class=" py-4">6ceb7891-c061-4c6a-87c4-06ed0601e6fb</td>
+                <td class="px-6 py-4">Akande Mercy</td>
+                <td class="px-6 py-4">okay</td>
+                <td class="px-6 py-4">₦ 4000</td>
+                <td class="px-6 py-4">19 January, 2024 11:43 pm</td>
+              </tr>
+            </tbody>
+          </table>
+          <button
+            type="submit"
+            class="py-3 px-5 m-4  justify-self-end text-sm font-medium text-center text-white rounded-lg bg-blue-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+          >
+            Export as CSV
+          </button>
 
           <div className="my-4 w-full">
             <p

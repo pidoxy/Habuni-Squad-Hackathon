@@ -2,11 +2,14 @@ import axios from "axios";
 import React, { useState } from "react";
 import { redirect, useNavigate } from "react-router-dom";
 
+
 const Signup = () => {
   const navigate = useNavigate();
 
-  const BASE_URL = "https://squad-e2vj.onrender.com";
+  const BASE_URL = "https://squad-e2vj.onrender.com/";
   const SQUADCO = "https://sandbox-pay.squadco.com/";
+
+  // const notify = () => toast("You have Successfully Signed up and a virtual account has been assigned to you!");
 
   const [formData, setFormData] = useState({
     customer_identifier: "CCC",
@@ -28,31 +31,32 @@ const Signup = () => {
 
     // navigate('/home')
     // Send a POST request
-    // await axios({
-    //   method: "post",
-    //   url: `${BASE_URL}/virtual-account`,
-    //   data: {
-    //     customer_identifier: "CCC",
-    //     first_name: "Joesp",
-    //     last_name: "Ayodel",
-    //     mobile_num: "08139011943",
-    //     email: "ayo@gmai.com",
-    //     bvn: "22234321165",
-    //     dob: "10/30/1990",
-    //     address: "22 Kota street, UK",
-    //     gender: "1",
-    //     beneficiary_account: "4920299492",
-    //   },
-    // }).then(function (response) {
-    //   console.log(response.data);
-    //   console.log(response.data.data);
-    //   if (response.data.status === 200) {
-    //     window.open(`${SQUADCO}/${formData.hash}`, "_blank", "noreferrer");
-    //   }
-    //   //   setUrl(response.data.data.checkout_url)
-    //   navigate("/home");
-    //   //   window.open(`${SQUADCO}/${formData.hash}`, '_blank', 'noreferrer');
-    // });
+    await axios({
+      method: "post",
+      url: `${BASE_URL}payment/create-virtual-account/`,
+      data: {
+        "customer_identifier": "CCC",
+        "first_name": "Joep",
+        "last_name": "Ayodel",
+        "mobile_num": "08139011943",
+        "email": "ayo@gmai.com",
+        "bvn": "22234321165",
+        "dob": "10/30/1990",
+        "address": "22 Kota street, UK",
+        "gender": "1",
+        "beneficiary_account": "4920299492"
+      },
+    }).then(function (response) {
+      console.log(response.data);
+      console.log(response.data.data);
+      if (response.data.status === 200) {
+        // notify();
+        // window.open(`${SQUADCO}/${formData.hash}`, "_blank", "noreferrer");
+      }
+      //   setUrl(response.data.data.checkout_url)
+      navigate("/home");
+      //   window.open(`${SQUADCO}/${formData.hash}`, '_blank', 'noreferrer');
+    });
 
     // local signup
     // await axios({
@@ -82,6 +86,7 @@ const Signup = () => {
       <form className="w-full mx-auto my-6  max-w-lg">
         <div className="flex flex-wrap -mx-3 mb-3">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          {/* <ToastContainer /> */}
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
               htmlFor="first-name"
